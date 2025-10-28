@@ -18,176 +18,7 @@ TRUNCATE TABLE students;
 TRUNCATE TABLE users;
 SET FOREIGN_KEY_CHECKS = 1;
 /* bcrypt ($2a$) hash for Password@123 — works with bcryptjs */
-SET @PWD := '$2a$10$0QxqMsDU1aHI0Q78DefghuYFcMI73m.5vCrgwli50wAk1f.VOYJKW';
-/* ======================
- USERS — Admins (2)
- ====================== */
-INSERT INTO users (email, password_hash, role, full_name)
-VALUES (
-        'admin1@gmail.com',
-        @PWD,
-        'ADMIN',
-        'System Admin One'
-    ),
-    (
-        'admin2@gmail.com',
-        @PWD,
-        'ADMIN',
-        'System Admin Two'
-    );
-/* ======================
- USERS — Faculty (5)
- ====================== */
-INSERT INTO users (email, password_hash, role, full_name)
-VALUES (
-        'faculty1@gmail.com',
-        @PWD,
-        'FACULTY',
-        'Prof. Ramesh Shrestha'
-    ),
-    (
-        'faculty2@gmail.com',
-        @PWD,
-        'FACULTY',
-        'Prof. Sita Koirala'
-    ),
-    (
-        'faculty3@gmail.com',
-        @PWD,
-        'FACULTY',
-        'Prof. Bikash Adhikari'
-    ),
-    (
-        'faculty4@gmail.com',
-        @PWD,
-        'FACULTY',
-        'Prof. Nirmala Basnet'
-    ),
-    (
-        'faculty5@gmail.com',
-        @PWD,
-        'FACULTY',
-        'Prof. Prakash Thapa'
-    );
-/* ======================
- USERS — Parents (20)
- ====================== */
-INSERT INTO users (email, password_hash, role, full_name)
-VALUES (
-        'parent01@gmail.com',
-        @PWD,
-        'PARENT',
-        'Manoj Shrestha'
-    ),
-    (
-        'parent02@gmail.com',
-        @PWD,
-        'PARENT',
-        'Sushila Ghimire'
-    ),
-    (
-        'parent03@gmail.com',
-        @PWD,
-        'PARENT',
-        'Ramesh Adhikari'
-    ),
-    (
-        'parent04@gmail.com',
-        @PWD,
-        'PARENT',
-        'Rajendra Karki'
-    ),
-    (
-        'parent05@gmail.com',
-        @PWD,
-        'PARENT',
-        'Bhuwan Thapa'
-    ),
-    (
-        'parent06@gmail.com',
-        @PWD,
-        'PARENT',
-        'Mina Khadka'
-    ),
-    (
-        'parent07@gmail.com',
-        @PWD,
-        'PARENT',
-        'Krishna Bista'
-    ),
-    (
-        'parent08@gmail.com',
-        @PWD,
-        'PARENT',
-        'Bimala Poudel'
-    ),
-    (
-        'parent09@gmail.com',
-        @PWD,
-        'PARENT',
-        'Narayan Pandey'
-    ),
-    (
-        'parent10@gmail.com',
-        @PWD,
-        'PARENT',
-        'Gita Shah'
-    ),
-    (
-        'parent11@gmail.com',
-        @PWD,
-        'PARENT',
-        'Sunil Koirala'
-    ),
-    (
-        'parent12@gmail.com',
-        @PWD,
-        'PARENT',
-        'Saraswati Shrestha'
-    ),
-    (
-        'parent13@gmail.com',
-        @PWD,
-        'PARENT',
-        'Kamal Gurung'
-    ),
-    (
-        'parent14@gmail.com',
-        @PWD,
-        'PARENT',
-        'Sujata Rai'
-    ),
-    (
-        'parent15@gmail.com',
-        @PWD,
-        'PARENT',
-        'Dipak Panta'
-    ),
-    (
-        'parent16@gmail.com',
-        @PWD,
-        'PARENT',
-        'Rita Tamang'
-    ),
-    (
-        'parent17@gmail.com',
-        @PWD,
-        'PARENT',
-        'Hari Neupane'
-    ),
-    ('parent18@gmail.com', @PWD, 'PARENT', 'Laxmi KC'),
-    (
-        'parent19@gmail.com',
-        @PWD,
-        'PARENT',
-        'Bharat Shahi'
-    ),
-    (
-        'parent20@gmail.com',
-        @PWD,
-        'PARENT',
-        'Indira Lama'
-    );
+SET @PWD := '$2a$10$LsEIr0Tx1Qxv8TRKuAIvz.Flruwrd1ZTcDAHHt.bi69wYkV5DoOFq';
 /* ======================
  USERS — Students (20)
  ====================== */
@@ -310,6 +141,175 @@ VALUES (
         'student20@gmail.com',
         @PWD,
         'STUDENT',
+        'Indira Lama'
+    );
+/* ======================
+ USERS — Faculty (5)
+ ====================== */
+INSERT INTO users (email, password_hash, role, full_name)
+VALUES (
+        'faculty1@gmail.com',
+        @PWD,
+        'FACULTY',
+        'Prof. Ramesh Shrestha'
+    ),
+    (
+        'faculty2@gmail.com',
+        @PWD,
+        'FACULTY',
+        'Prof. Sita Koirala'
+    ),
+    (
+        'faculty3@gmail.com',
+        @PWD,
+        'FACULTY',
+        'Prof. Bikash Adhikari'
+    ),
+    (
+        'faculty4@gmail.com',
+        @PWD,
+        'FACULTY',
+        'Prof. Nirmala Basnet'
+    ),
+    (
+        'faculty5@gmail.com',
+        @PWD,
+        'FACULTY',
+        'Prof. Prakash Thapa'
+    );
+/* ======================
+ USERS — Admins (2)
+ ====================== */
+INSERT INTO users (email, password_hash, role, full_name)
+VALUES (
+        'admin1@gmail.com',
+        @PWD,
+        'ADMIN',
+        'System Admin One'
+    ),
+    (
+        'admin2@gmail.com',
+        @PWD,
+        'ADMIN',
+        'System Admin Two'
+    );
+/* ======================
+ USERS — Parents (20)
+ ====================== */
+INSERT INTO users (email, password_hash, role, full_name)
+VALUES (
+        'parent01@gmail.com',
+        @PWD,
+        'PARENT',
+        'Manoj Shrestha'
+    ),
+    (
+        'parent02@gmail.com',
+        @PWD,
+        'PARENT',
+        'Sushila Ghimire'
+    ),
+    (
+        'parent03@gmail.com',
+        @PWD,
+        'PARENT',
+        'Ramesh Adhikari'
+    ),
+    (
+        'parent04@gmail.com',
+        @PWD,
+        'PARENT',
+        'Rajendra Karki'
+    ),
+    (
+        'parent05@gmail.com',
+        @PWD,
+        'PARENT',
+        'Bhuwan Thapa'
+    ),
+    (
+        'parent06@gmail.com',
+        @PWD,
+        'PARENT',
+        'Mina Khadka'
+    ),
+    (
+        'parent07@gmail.com',
+        @PWD,
+        'PARENT',
+        'Krishna Bista'
+    ),
+    (
+        'parent08@gmail.com',
+        @PWD,
+        'PARENT',
+        'Bimala Poudel'
+    ),
+    (
+        'parent09@gmail.com',
+        @PWD,
+        'PARENT',
+        'Narayan Pandey'
+    ),
+    (
+        'parent10@gmail.com',
+        @PWD,
+        'PARENT',
+        'Gita Shah'
+    ),
+    (
+        'parent11@gmail.com',
+        @PWD,
+        'PARENT',
+        'Sunil Koirala'
+    ),
+    (
+        'parent12@gmail.com',
+        @PWD,
+        'PARENT',
+        'Saraswati Shrestha'
+    ),
+    (
+        'parent13@gmail.com',
+        @PWD,
+        'PARENT',
+        'Kamal Gurung'
+    ),
+    (
+        'parent14@gmail.com',
+        @PWD,
+        'PARENT',
+        'Sujata Rai'
+    ),
+    (
+        'parent15@gmail.com',
+        @PWD,
+        'PARENT',
+        'Dipak Panta'
+    ),
+    (
+        'parent16@gmail.com',
+        @PWD,
+        'PARENT',
+        'Rita Tamang'
+    ),
+    (
+        'parent17@gmail.com',
+        @PWD,
+        'PARENT',
+        'Hari Neupane'
+    ),
+    ('parent18@gmail.com', @PWD, 'PARENT', 'Laxmi KC'),
+    (
+        'parent19@gmail.com',
+        @PWD,
+        'PARENT',
+        'Bharat Shahi'
+    ),
+    (
+        'parent20@gmail.com',
+        @PWD,
+        'PARENT',
         'Indira Lama'
     );
 /* ==========================================

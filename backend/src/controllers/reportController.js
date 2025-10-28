@@ -57,25 +57,25 @@ export const attendanceTrend = async (req, res, next) => {
 
 export const gradesSummary = async (req, res, next) => {
   try {
-    const student_id = Number(req.query.student_id);
     const [rows] = await pool.query(
       `
-      SELECT c.code AS course_code,
-             ROUND(100 * SUM(m.score)/NULLIF(SUM(m.max_score),0), 2) AS percent
-      FROM marks m
-      JOIN enrollments e ON m.enrollment_id = e.id
-      JOIN courses c ON e.course_id = c.id
-      WHERE e.student_id = ?
-      GROUP BY c.code
-      ORDER BY c.code
-      `,
-      [student_id]
+      SELECT course_code,
+             ROUND(AVG(percent), 2) AS avg,
+             ROUND(MAX(percent), 2) AS max,
+             ROUND(MIN(percent), 2) AS min
+      FROM (
+        SELECT c.code AS course_code, e.student_id,
+               ROUND(100 * SUM(m.score)/NULLIF(SUM(m.max_score),0), 2) AS percent
+        FROM marks m
+        JOIN enrollments e ON m.enrollment_id = e.id
+        JOIN courses c ON e.course_id = c.id
+        GROUP BY c.code, e.student_id
+      ) sub
+      GROUP BY course_code
+      ORDER BY course_code
+      `
     );
-    const toGpa = (p)=> p>=90?4: p>=80?3.5: p>=70?3: p>=60?2.5: p>=50?2: 0;
-    const overall = rows.length
-      ? (rows.reduce((s,r)=>s+toGpa(r.percent),0)/rows.length).toFixed(2)
-      : null;
-    res.json({ courses: rows, gpa: overall });
+    res.json(rows);
   } catch (e) { next(e); }
 };
 

@@ -1,6 +1,8 @@
+// frontend/src/main.jsx
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
 import Layout from "./components/Layout.jsx";
 import Protected from "./components/Protected.jsx";
 import AuthProvider from "./store/authContext.jsx";
@@ -12,18 +14,24 @@ import Marks from "./pages/Marks.jsx";
 import AdminUsers from "./pages/AdminUsers.jsx";
 import AdminCourses from "./pages/AdminCourses.jsx";
 import FacultyTakeAttendance from "./pages/FacultyTakeAttendance.jsx";
-import FacultyAddMarks from "./pages/FacultyAddMarks.jsx";
+
+// Use the pages we actually have:
 import AttendanceViewer from "./pages/AttendanceViewer.jsx";
-import MarksViewer from "./pages/MarksViewer.jsx";
+import AddMarks from "./pages/AddMarks.jsx";
 import Reports from "./pages/Reports.jsx";
 import ParentPortal from "./pages/ParentPortal.jsx";
-import RootErrorBoundary from "./routes/RootErrorBoundary.jsx";
+import NotFound from "./pages/NotFound.jsx";
+import AdminNotifications from "./pages/AdminNotifications.jsx";
 
 import "./styles/index.css";
+
+// If you DO have a RootErrorBoundary component, uncomment the next line
+// import RootErrorBoundary from "./routes/RootErrorBoundary.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    // errorElement: <RootErrorBoundary />, // uncomment if the file exists
     element: (
       <Layout>
         <Protected>
@@ -31,7 +39,6 @@ const router = createBrowserRouter([
         </Protected>
       </Layout>
     ),
-    errorElement: <RootErrorBoundary />,
   },
   {
     path: "/login",
@@ -82,10 +89,20 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/admin/notifications",
+    element: (
+      <Layout>
+        <Protected allow={["ADMIN"]}>
+          <AdminNotifications />
+        </Protected>
+      </Layout>
+    ),
+  },
+  {
     path: "/faculty/take-attendance",
     element: (
       <Layout>
-        <Protected allow={["FACULTY"]}>
+        <Protected allow={["FACULTY", "ADMIN"]}>
           <FacultyTakeAttendance />
         </Protected>
       </Layout>
@@ -95,8 +112,8 @@ const router = createBrowserRouter([
     path: "/faculty/add-marks",
     element: (
       <Layout>
-        <Protected allow={["FACULTY"]}>
-          <FacultyAddMarks />
+        <Protected allow={["FACULTY", "ADMIN"]}>
+          <AddMarks />
         </Protected>
       </Layout>
     ),
@@ -105,18 +122,8 @@ const router = createBrowserRouter([
     path: "/attendance/viewer",
     element: (
       <Layout>
-        <Protected allow={["ADMIN", "FACULTY"]}>
+        <Protected allow={["FACULTY", "ADMIN"]}>
           <AttendanceViewer />
-        </Protected>
-      </Layout>
-    ),
-  },
-  {
-    path: "/marks/viewer",
-    element: (
-      <Layout>
-        <Protected allow={["ADMIN", "FACULTY"]}>
-          <MarksViewer />
         </Protected>
       </Layout>
     ),
@@ -125,7 +132,7 @@ const router = createBrowserRouter([
     path: "/reports",
     element: (
       <Layout>
-        <Protected allow={["ADMIN", "FACULTY"]}>
+        <Protected allow={["FACULTY", "ADMIN"]}>
           <Reports />
         </Protected>
       </Layout>
@@ -135,9 +142,18 @@ const router = createBrowserRouter([
     path: "/parent",
     element: (
       <Layout>
-        <Protected allow={["PARENT"]}>
+        <Protected allow={["PARENT", "ADMIN"]}>
           <ParentPortal />
         </Protected>
+      </Layout>
+    ),
+  },
+  // Catch-all 404
+  {
+    path: "*",
+    element: (
+      <Layout>
+        <NotFound />
       </Layout>
     ),
   },

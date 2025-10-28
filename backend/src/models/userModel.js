@@ -1,10 +1,14 @@
-import { pool } from '../db.js';
+// src/models/userModel.js
+import { pool } from "../db.js";
 
+export async function findUserByEmail(email) {
+  const [rows] = await pool.query(
+    "SELECT id, email, password_hash, role, full_name FROM users WHERE email = ? LIMIT 1",
+    [email]
+  );
+  return rows[0];
+}
 
-export const findUserByEmail = async (email) => {
-const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
-return rows[0];
-};
 
 
 export const findUserById = async (id) => {
